@@ -449,3 +449,35 @@ function copyMessage() {
 
 window.makeChoice = makeChoice; // Expose to global
 window.copyMessage = copyMessage;
+
+// Refresh Button Logic
+document.getElementById("refresh-btn").addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (confirm("เริ่มใหม่ไหมครับ? 🐱")) {
+    location.reload();
+  }
+});
+
+// Pull-to-Refresh Logic (Simple)
+let touchStartY = 0;
+document.addEventListener(
+  "touchstart",
+  (e) => {
+    touchStartY = e.touches[0].clientY;
+  },
+  { passive: true },
+);
+
+document.addEventListener(
+  "touchend",
+  (e) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    if (touchEndY - touchStartY > 150) {
+      // Dragged down significantly
+      if (confirm("รีเฟรชหน้าเว็บไหม? 🔄")) {
+        location.reload();
+      }
+    }
+  },
+  { passive: true },
+);
