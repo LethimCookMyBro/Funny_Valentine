@@ -47,10 +47,13 @@ const audioBtn = document.getElementById("audio-btn");
 const progressDots = document.getElementById("progress-dots");
 
 // Audio (Placeholder frequency synth if no file)
+// Audio Logic (Web Audio API)
 let audioCtx;
-let oscillator;
+let bgmOscillators = [];
+let isMuted = true; // Use internal muted state, button toggles this
 
 function initAudio() {
+  if (audioCtx) return;
   try {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     audioCtx = new AudioContext();
@@ -59,22 +62,79 @@ function initAudio() {
   }
 }
 
-function playBeep() {
-  if (!appState.audioEnabled || !audioCtx) return;
+// 8-bit Melody: Simple arpeggio
+const melody = [
+  392.0,
+  392.0,
+  440.0,
+  392.0,
+  523.25,
+  493.88, // Happy Birthday-ish start to test
+  392.0,
+  392.0,
+  440.0,
+  392.0,
+  587.33,
+  523.25,
+];
+// Actually let's do a simple cute loop: C E G A G E C
+const cuteLoop = [523.25, 659.25, 783.99, 880.0, 783.99, 659.25];
+let noteIndex = 0;
+let bgmInterval;
+
+function playNote(freq) {
+  if (!audioCtx || isMuted) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = "square"; // 8-bit feel
+  osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+  gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.3);
+}
+
+function startBGM() {
+  if (bgmInterval) clearInterval(bgmInterval);
+  bgmInterval = setInterval(() => {
+    if (!isMuted && audioCtx && audioCtx.state === "running") {
+      playNote(cuteLoop[noteIndex]);
+      noteIndex = (noteIndex + 1) % cuteLoop.length;
+    }
+  }, 400); // Speed of melody
+}
+
+function stopBGM() {
+  if (bgmInterval) clearInterval(bgmInterval);
+}
+
+function playMeow() {
+  if (!audioCtx || isMuted) return;
   if (audioCtx.state === "suspended") audioCtx.resume();
 
-  // Simple 8-bit randomness
   const osc = audioCtx.createOscillator();
-  const gainNode = audioCtx.createGain();
-  osc.type = "square";
-  osc.frequency.setValueAtTime(200 + Math.random() * 300, audioCtx.currentTime);
-  gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+  const gain = audioCtx.createGain();
 
-  osc.connect(gainNode);
-  gainNode.connect(audioCtx.destination);
+  osc.type = "triangle"; // Softer sound for meow
+  // Meow pitch envelope: High -> Low
+  osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.2);
+
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
   osc.start();
-  osc.stop(audioCtx.currentTime + 0.1);
+  osc.stop(audioCtx.currentTime + 0.3);
+}
+
+// Replaces playBeep
+function playSoundEffect() {
+  playMeow();
 }
 
 // Logic
@@ -153,6 +213,9 @@ function nextScene() {
       tapHint.classList.remove("visible"); // No need for tap hint on choice screen
     }
   });
+
+  // Play Meow on scene change (if audio enabled)
+  if (!isMuted) playMeow();
 }
 
 // Global Click Handlers
@@ -184,11 +247,24 @@ document.getElementById("start-btn").addEventListener("click", (e) => {
 });
 
 // Audio Toggle
+// Audio Toggle
 audioBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-  appState.audioEnabled = !appState.audioEnabled;
-  audioBtn.innerText = appState.audioEnabled ? "🎵 ON" : "🔇 OFF";
-  if (appState.audioEnabled && !audioCtx) initAudio();
+
+  if (!audioCtx) initAudio();
+  if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+
+  isMuted = !isMuted; // Toggle local state
+  appState.audioEnabled = !isMuted; // Sync app state
+
+  audioBtn.innerText = !isMuted ? "🎵 ON" : "🔇 OFF";
+
+  if (!isMuted) {
+    playMeow(); // Feedback
+    startBGM(); // Start loop
+  } else {
+    stopBGM();
+  }
 });
 
 // Choice Handlers
