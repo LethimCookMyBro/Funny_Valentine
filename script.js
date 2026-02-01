@@ -472,11 +472,9 @@ document.addEventListener(
   "touchend",
   (e) => {
     const touchEndY = e.changedTouches[0].clientY;
-    if (touchEndY - touchStartY > 150) {
-      // Dragged down significantly
-      if (confirm("รีเฟรชหน้าเว็บไหม? 🔄")) {
-        location.reload();
-      }
+    if (touchEndY - touchStartY > 150 && window.scrollY === 0) {
+      // Dragged down significantly and at top of page
+      location.reload();
     }
   },
   { passive: true },
