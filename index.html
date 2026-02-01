@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Pixel Cat Say Something</title>
+    <title>Cat Say Something</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="icon"
@@ -30,8 +30,8 @@
         <h1>Pixel Cat<br />มีอะไรจะบอก<br />... 😼</h1>
 
         <div class="cat-container">
-          <!-- Inline SVG: Cat Start (Neko Style) -->
-          <!-- 32x32 Grid for chunky look -->
+          <!-- Inline SVG: Cat Start (Ultra Cute Style) -->
+          <!-- 32x32 Grid, but using softer colors and rounder shape -->
           <svg
             class="cat-svg active"
             id="cat-start-scene"
@@ -39,60 +39,62 @@
             xmlns="http://www.w3.org/2000/svg"
             shape-rendering="crispEdges"
           >
-            <!-- Reference: Body Left, Head Right, Stripes -->
-            <!-- Scale: 1 unit = 1 pixel -->
+            <!-- Style: Chubby, White, Brown Outline -->
 
-            <!-- Floating Heart -->
+            <!-- Heart Buildup -->
             <path
-              fill="#000"
-              d="M19 4 h2 v2 h-2 z M22 4 h2 v2 h-2 z M18 6 h2 v2 h-2 z M21 6 h2 v2 h-2 z M24 6 h2 v2 h-2 z M19 8 h2 v2 h-2 z M23 8 h2 v2 h-2 z M21 10 h2 v2 h-2 z"
+              fill="#FF6B6B"
+              d="M14 6 h2 v2 h-2 z M18 6 h2 v2 h-2 z M14 8 h6 v2 h-6 z M15 10 h4 v2 h-4 z M16 12 h2 v2 h-2 z"
             />
-            <path
-              fill="#FF4444"
-              d="M19 6 h2 v2 h-2 z M22 6 h2 v2 h-2 z M19 8 h4 v2 h-4 z M21 10 h2 v2 h-2 z"
-            />
-            <!-- Heart Fill -->
 
-            <!-- Cat Body & Head -->
-            <!-- Outline Black -->
+            <!-- Outline (Warm Brown) -->
             <path
-              fill="#000"
+              fill="#5D4037"
               d="
-                   M20 15 h2 v2 h-2 z M26 15 h2 v2 h-2 z
-                   M19 17 h2 v2 h-2 z M23 17 h2 v2 h-2 z M27 17 h2 v2 h-2 z
-                   M18 19 h1 v4 h-1 z M29 19 h1 v4 h-1 z
-                   M10 18 h2 v2 h-2 z
-                   M9 20 h1 v2 h-1 z
-                   M8 22 h1 v4 h-1 z
-                   M9 26 h20 v2 h-20 z
-                   M9 28 h4 v2 h-4 z M16 28 h4 v2 h-4 z M23 28 h4 v2 h-4 z
-                   "
+             M11 16 h2 v-2 h2 v-2 h4 v2 h2 v2 h2 v6 h-2 v6 h2 v2 h2 v2 h-2 v2 h-6 v-2 h-2 v2 h-6 v-2 h-2 v-6 h-2 v-6 Z
+             M11 16 h-2 v6 h-2 v2 h2 v4 h2 v2 h6
+             "
             />
 
-            <!-- Fill White -->
-            <rect x="19" y="19" width="10" height="7" fill="#FFF" />
-            <!-- Head -->
-            <rect x="9" y="20" width="10" height="6" fill="#FFF" />
-            <!-- Body -->
-            <rect x="19" y="17" width="2" height="2" fill="#FFF" />
-            <!-- Ear L -->
-            <rect x="27" y="17" width="2" height="2" fill="#FFF" />
-            <!-- Ear R -->
+            <!-- Manual pixel correction for Round Body Shape -->
+            <path
+              fill="#5D4037"
+              d="
+             M11 15 h2 v-2 h6 v2 h2 v-2 h2 v4 h2 v10 h-2 v2 h-2 v2 h-14 v-2 h-2 v-2 h-2 v-10 h2 v-4 Z
+             "
+            />
+            <rect x="9" y="19" width="14" height="10" fill="#FFF" />
+            <!-- Main Body -->
+            <rect x="11" y="17" width="10" height="4" fill="#FFF" />
+            <!-- Head Top -->
+            <rect x="10" y="18" width="12" height="10" fill="#FFF" />
+            <!-- Head/Body Merge -->
 
-            <!-- Stripes (Black) -->
-            <rect x="12" y="20" width="2" height="3" fill="#000" />
-            <rect x="15" y="20" width="2" height="3" fill="#000" />
+            <!-- Ears -->
+            <path fill="#FFF" d="M11 14 h2 v2 h-2 z M19 14 h2 v2 h-2 z" />
+            <rect x="12" y="15" width="2" height="1" fill="#FFAB91" />
+            <!-- Ear Pink -->
+            <rect x="18" y="15" width="2" height="1" fill="#FFAB91" />
+            <!-- Ear Pink -->
 
-            <!-- Face -->
-            <rect x="21" y="21" width="2" height="2" fill="#000" />
+            <!-- Face (Cute) -->
+            <rect x="12" y="21" width="2" height="2" fill="#2C1A0F" />
             <!-- Eye L -->
-            <rect x="26" y="21" width="2" height="2" fill="#000" />
+            <rect x="18" y="21" width="2" height="2" fill="#2C1A0F" />
             <!-- Eye R -->
-            <rect x="24" y="23" width="1" height="1" fill="#000" />
-            <!-- Nose -->
+            <rect x="13" y="21" width="1" height="1" fill="#FFF" />
+            <!-- Shine -->
+            <rect x="19" y="21" width="1" height="1" fill="#FFF" />
+            <!-- Shine -->
 
-            <!-- Tail tip -->
-            <rect x="8" y="20" width="1" height="2" fill="#FFF" />
+            <rect x="15" y="22" width="2" height="1" fill="#FFAB91" />
+            <!-- Nose -->
+            <rect x="15" y="23" width="2" height="1" fill="#2C1A0F" />
+            <!-- Mouth line -->
+
+            <!-- Blush -->
+            <rect x="11" y="23" width="2" height="1" fill="#FFCCBC" />
+            <rect x="19" y="23" width="2" height="1" fill="#FFCCBC" />
           </svg>
         </div>
 
@@ -102,7 +104,7 @@
       <!-- Main Interface -->
       <div id="main-interface" class="scene" style="z-index: 5">
         <div class="cat-container">
-          <!-- Cat Start: Neko Style -->
+          <!-- Cat Start: Ultra Cute -->
           <svg
             class="cat-svg active"
             id="cat-start"
@@ -110,50 +112,30 @@
             xmlns="http://www.w3.org/2000/svg"
             shape-rendering="crispEdges"
           >
-            <!-- Cat Shape (No Heart) -->
-
-            <!-- Outline Black -->
+            <!-- Outline -->
             <path
-              fill="#000"
-              d="
-                   M20 15 h2 v2 h-2 z M26 15 h2 v2 h-2 z
-                   M19 17 h2 v2 h-2 z M23 17 h2 v2 h-2 z M27 17 h2 v2 h-2 z
-                   M18 19 h1 v4 h-1 z M29 19 h1 v4 h-1 z
-                   M10 18 h2 v2 h-2 z
-                   M9 20 h1 v2 h-1 z
-                   M8 22 h1 v4 h-1 z
-                   M9 26 h20 v2 h-20 z
-                   M9 28 h4 v2 h-4 z M16 28 h4 v2 h-4 z M23 28 h4 v2 h-4 z
-                   "
+              fill="#5D4037"
+              d="M11 15 h2 v-2 h6 v2 h2 v-2 h2 v4 h2 v10 h-2 v2 h-2 v2 h-14 v-2 h-2 v-2 h-2 v-10 h2 v-4 Z"
             />
+            <!-- Fill -->
+            <rect x="10" y="18" width="12" height="10" fill="#FFF" />
+            <rect x="11" y="17" width="10" height="2" fill="#FFF" />
+            <path fill="#FFF" d="M11 14 h2 v2 h-2 z M19 14 h2 v2 h-2 z" />
+            <!-- Ears -->
 
-            <!-- Fill White -->
-            <rect x="19" y="19" width="10" height="7" fill="#FFF" />
-            <!-- Head -->
-            <rect x="9" y="20" width="10" height="6" fill="#FFF" />
-            <!-- Body -->
-            <rect x="19" y="17" width="2" height="2" fill="#FFF" />
-            <!-- Ear L -->
-            <rect x="27" y="17" width="2" height="2" fill="#FFF" />
-            <!-- Ear R -->
-
-            <!-- Stripes -->
-            <rect x="12" y="20" width="2" height="3" fill="#000" />
-            <rect x="15" y="20" width="2" height="3" fill="#000" />
-
-            <!-- Face -->
-            <rect x="21" y="21" width="2" height="2" fill="#000" />
-            <!-- Eye L -->
-            <rect x="26" y="21" width="2" height="2" fill="#000" />
-            <!-- Eye R -->
-            <rect x="24" y="23" width="1" height="1" fill="#000" />
-            <!-- Nose -->
-
-            <!-- Tail tip -->
-            <rect x="8" y="20" width="1" height="2" fill="#FFF" />
+            <!-- Details -->
+            <rect x="12" y="15" width="2" height="1" fill="#FFAB91" />
+            <rect x="18" y="15" width="2" height="1" fill="#FFAB91" />
+            <rect x="12" y="21" width="2" height="2" fill="#2C1A0F" />
+            <rect x="13" y="21" width="1" height="1" fill="#FFF" />
+            <rect x="18" y="21" width="2" height="2" fill="#2C1A0F" />
+            <rect x="19" y="21" width="1" height="1" fill="#FFF" />
+            <rect x="15" y="23" width="2" height="1" fill="#2C1A0F" />
+            <rect x="11" y="23" width="2" height="1" fill="#FFCCBC" />
+            <rect x="19" y="23" width="2" height="1" fill="#FFCCBC" />
           </svg>
 
-          <!-- Cat Shy: Blush & Looking Away -->
+          <!-- Cat Shy -->
           <svg
             class="cat-svg"
             id="cat-shy"
@@ -161,28 +143,38 @@
             xmlns="http://www.w3.org/2000/svg"
             shape-rendering="crispEdges"
           >
-            <!-- Outline -->
+            <!-- Similar Body -->
             <path
-              fill="#000"
-              d="M20 15 h2 v2 h-2 z M26 15 h2 v2 h-2 z M19 17 h2 v2 h-2 z M23 17 h2 v2 h-2 z M27 17 h2 v2 h-2 z M18 19 h1 v4 h-1 z M29 19 h1 v4 h-1 z M10 18 h2 v2 h-2 z M9 20 h1 v2 h-1 z M8 22 h1 v4 h-1 z M9 26 h20 v2 h-20 z M9 28 h4 v2 h-4 z M16 28 h4 v2 h-4 z M23 28 h4 v2 h-4 z"
+              fill="#5D4037"
+              d="M11 15 h2 v-2 h6 v2 h2 v-2 h2 v4 h2 v10 h-2 v2 h-2 v2 h-14 v-2 h-2 v-2 h-2 v-10 h2 v-4 Z"
             />
-            <rect x="19" y="19" width="10" height="7" fill="#FFF" />
-            <rect x="9" y="20" width="10" height="6" fill="#FFF" />
-            <rect x="19" y="17" width="2" height="2" fill="#FFF" />
-            <rect x="27" y="17" width="2" height="2" fill="#FFF" />
-            <rect x="12" y="20" width="2" height="3" fill="#000" />
-            <rect x="15" y="20" width="2" height="3" fill="#000" />
-            <rect x="8" y="20" width="1" height="2" fill="#FFF" />
+            <rect x="10" y="18" width="12" height="10" fill="#FFF" />
+            <rect x="11" y="17" width="10" height="2" fill="#FFF" />
+            <path fill="#FFF" d="M11 14 h2 v2 h-2 z M19 14 h2 v2 h-2 z" />
+            <rect x="12" y="15" width="2" height="1" fill="#FFAB91" />
+            <rect x="18" y="15" width="2" height="1" fill="#FFAB91" />
 
-            <!-- Face (Shy/Blush) -->
-            <rect x="22" y="22" width="2" height="1" fill="#000" />
-            <!-- Eye L Low -->
-            <rect x="27" y="22" width="2" height="1" fill="#000" />
-            <!-- Eye R Low -->
-            <rect x="20" y="23" width="2" height="1" fill="#FFAAAA" />
-            <!-- Blush -->
-            <rect x="27" y="23" width="2" height="1" fill="#FFAAAA" />
-            <!-- Blush -->
+            <!-- Shy Face -->
+            <rect x="12" y="22" width="2" height="1" fill="#2C1A0F" />
+            <!-- Eye Closed -->
+            <rect x="18" y="22" width="2" height="1" fill="#2C1A0F" />
+            <!-- Eye Closed -->
+
+            <!-- Heavy Blush -->
+            <rect x="11" y="23" width="3" height="1" fill="#FF8A80" />
+            <rect x="18" y="23" width="3" height="1" fill="#FF8A80" />
+
+            <!-- Hands -->
+            <rect x="14" y="24" width="4" height="2" fill="#FFF" />
+            <rect
+              x="14"
+              y="24"
+              width="4"
+              height="2"
+              fill="none"
+              stroke="#5D4037"
+              stroke-width="1"
+            />
           </svg>
 
           <!-- Cat Deadpan -->
@@ -193,29 +185,24 @@
             xmlns="http://www.w3.org/2000/svg"
             shape-rendering="crispEdges"
           >
-            <!-- Outline -->
             <path
-              fill="#000"
-              d="M20 15 h2 v2 h-2 z M26 15 h2 v2 h-2 z M19 17 h2 v2 h-2 z M23 17 h2 v2 h-2 z M27 17 h2 v2 h-2 z M18 19 h1 v4 h-1 z M29 19 h1 v4 h-1 z M10 18 h2 v2 h-2 z M9 20 h1 v2 h-1 z M8 22 h1 v4 h-1 z M9 26 h20 v2 h-20 z M9 28 h4 v2 h-4 z M16 28 h4 v2 h-4 z M23 28 h4 v2 h-4 z"
+              fill="#5D4037"
+              d="M11 15 h2 v-2 h6 v2 h2 v-2 h2 v4 h2 v10 h-2 v2 h-2 v2 h-14 v-2 h-2 v-2 h-2 v-10 h2 v-4 Z"
             />
-            <rect x="19" y="19" width="10" height="7" fill="#FFF" />
-            <rect x="9" y="20" width="10" height="6" fill="#FFF" />
-            <rect x="19" y="17" width="2" height="2" fill="#FFF" />
-            <rect x="27" y="17" width="2" height="2" fill="#FFF" />
-            <rect x="12" y="20" width="2" height="3" fill="#000" />
-            <rect x="15" y="20" width="2" height="3" fill="#000" />
-            <rect x="8" y="20" width="1" height="2" fill="#FFF" />
+            <rect x="10" y="18" width="12" height="10" fill="#FFF" />
+            <rect x="11" y="17" width="10" height="2" fill="#FFF" />
+            <path fill="#FFF" d="M11 14 h2 v2 h-2 z M19 14 h2 v2 h-2 z" />
+            <rect x="12" y="15" width="2" height="1" fill="#FFAB91" />
+            <rect x="18" y="15" width="2" height="1" fill="#FFAB91" />
 
-            <!-- Face (Deadpan line) -->
-            <rect x="21" y="21" width="2" height="2" fill="#000" />
-            <!-- Eye L -->
-            <rect x="26" y="21" width="2" height="2" fill="#000" />
-            <!-- Eye R -->
-            <rect x="23" y="24" width="3" height="1" fill="#000" />
-            <!-- Mouth line -->
+            <!-- Deadpan Face -->
+            <rect x="12" y="21" width="2" height="1" fill="#2C1A0F" />
+            <rect x="18" y="21" width="2" height="1" fill="#2C1A0F" />
+            <rect x="14" y="24" width="4" height="1" fill="#2C1A0F" />
+            <!-- Flat mouth -->
           </svg>
 
-          <!-- Cat Shock (Mouth Open) -->
+          <!-- Cat Shock -->
           <svg
             class="cat-svg"
             id="cat-shock"
@@ -223,30 +210,30 @@
             xmlns="http://www.w3.org/2000/svg"
             shape-rendering="crispEdges"
           >
-            <!-- Outline -->
             <path
-              fill="#000"
-              d="M20 15 h2 v2 h-2 z M26 15 h2 v2 h-2 z M19 17 h2 v2 h-2 z M23 17 h2 v2 h-2 z M27 17 h2 v2 h-2 z M18 19 h1 v4 h-1 z M29 19 h1 v4 h-1 z M10 18 h2 v2 h-2 z M9 20 h1 v2 h-1 z M8 22 h1 v4 h-1 z M9 26 h20 v2 h-20 z M9 28 h4 v2 h-4 z M16 28 h4 v2 h-4 z M23 28 h4 v2 h-4 z"
+              fill="#5D4037"
+              d="M11 15 h2 v-2 h6 v2 h2 v-2 h2 v4 h2 v10 h-2 v2 h-2 v2 h-14 v-2 h-2 v-2 h-2 v-10 h2 v-4 Z"
             />
-            <rect x="19" y="19" width="10" height="7" fill="#FFF" />
-            <rect x="9" y="20" width="10" height="6" fill="#FFF" />
-            <rect x="19" y="17" width="2" height="2" fill="#FFF" />
-            <rect x="27" y="17" width="2" height="2" fill="#FFF" />
-            <rect x="12" y="20" width="2" height="3" fill="#000" />
-            <rect x="15" y="20" width="2" height="3" fill="#000" />
-            <rect x="8" y="20" width="1" height="2" fill="#FFF" />
+            <rect x="10" y="18" width="12" height="10" fill="#FFF" />
+            <rect x="11" y="17" width="10" height="2" fill="#FFF" />
+            <path fill="#FFF" d="M11 14 h2 v2 h-2 z M19 14 h2 v2 h-2 z" />
+            <rect x="12" y="15" width="2" height="1" fill="#FFAB91" />
+            <rect x="18" y="15" width="2" height="1" fill="#FFAB91" />
 
-            <!-- Face (Shock) -->
-            <rect x="21" y="20" width="2" height="2" fill="#000" />
-            <!-- Eye L High -->
-            <rect x="26" y="20" width="2" height="2" fill="#000" />
-            <!-- Eye R High -->
-            <rect x="23" y="23" width="3" height="3" fill="#000" />
+            <!-- Shock Face -->
+            <rect x="12" y="20" width="2" height="2" fill="#2C1A0F" />
+            <rect x="13" y="20" width="1" height="1" fill="#FFF" />
+            <rect x="18" y="20" width="2" height="2" fill="#2C1A0F" />
+            <rect x="19" y="20" width="1" height="1" fill="#FFF" />
+
+            <rect x="14" y="24" width="4" height="3" fill="#2C1A0F" />
             <!-- Mouth Open -->
-            <rect x="24" y="24" width="1" height="1" fill="#FF0000" />
+            <rect x="15" y="26" width="2" height="1" fill="#FF8A80" />
             <!-- Tongue -->
-            <rect x="29" y="18" width="1" height="2" fill="#00CCFF" />
-            <!-- Sweat -->
+
+            <!-- Tears/Sweat -->
+            <rect x="21" y="18" width="1" height="2" fill="#81D4FA" />
+            <rect x="10" y="23" width="1" height="2" fill="#81D4FA" />
           </svg>
         </div>
 

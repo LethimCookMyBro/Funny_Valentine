@@ -213,16 +213,19 @@ function makeChoice(choice) {
     noClickCount++;
 
     // 1. Grow Yes Button (Limit Max Scale to avoid layout break)
+    // 1. Grow Yes Button (Limit Max Scale to avoid layout break)
     const yesBtn = document.querySelector(".choice-btn:first-child");
     // Cap at scale 2.5 to prevent covering everything
     const currentScale = Math.min(1 + noClickCount * 0.2, 2.5);
     yesBtn.style.transform = `scale(${currentScale})`;
-    // Add highest z-index to ensure it stays on top if it gets huge
-    yesBtn.style.zIndex = 100 + noClickCount;
+    // Removed: yesBtn.style.zIndex = 100 + noClickCount; (This caused the issue)
 
-    // 2. Shrink No Button
+    // 2. Button Visual Feedback
     const noBtn = document.querySelector(".choice-btn:last-child");
     noBtn.style.transform = `scale(0.9)`;
+    // Ensure "No" button is always clickable/visible above the growing "Yes" button
+    noBtn.style.zIndex = 999;
+    yesBtn.style.zIndex = 1; // Ensure Yes stays below
     setTimeout(() => (noBtn.style.transform = "scale(1)"), 100);
 
     // 3. Change Cat Face
@@ -253,7 +256,7 @@ function makeChoice(choice) {
   actionDiv.className = "end-actions";
   actionDiv.innerHTML = `
         <button class="big-btn" onclick="copyMessage()">📋 Copy "ทักคับ"</button>
-        <button class="big-btn" style="background:#06C755; color:white; border-color:#05a546;" onclick="window.open('https://line.me/R/ti/p', '_blank')">💬 เปิด LINE</button>
+        <button class="big-btn" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:white; border-color:#bc1888;" onclick="window.open('https://instagram.com/', '_blank')">📸 เปิด IG</button>
         <div style="font-size:0.8rem; margin-top:10px; color:#aaa;">(แมวดีใจมาก)</div>
     `;
   document.querySelector(".dialogue-box").appendChild(actionDiv);
