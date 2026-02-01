@@ -2,7 +2,7 @@ const appState = {
   currentSceneIndex: -1, // -1 is Start Screen
   isTyping: false,
   textToType: "",
-  audioEnabled: false,
+  audioEnabled: true, // Start with audio ON
   audioPlaying: false,
 };
 
@@ -50,7 +50,7 @@ const progressDots = document.getElementById("progress-dots");
 // Audio Logic (Web Audio API)
 let audioCtx;
 let bgmOscillators = [];
-let isMuted = true; // Use internal muted state, button toggles this
+let isMuted = false; // Start with audio ON
 
 function initAudio() {
   if (audioCtx) return;
@@ -139,9 +139,16 @@ function playSoundEffect() {
 
 // Logic
 function startApp() {
+  // Initialize and start audio on first interaction
+  initAudio();
+  if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+  if (!isMuted) {
+    startBGM();
+    playMeow();
+  }
+
   document.getElementById("start-screen").classList.remove("active");
   document.getElementById("main-interface").classList.add("active");
-  initAudio();
   nextScene();
 }
 
@@ -228,6 +235,7 @@ document.body.addEventListener("click", (e) => {
   if (appState.isTyping) {
     // Skip typing
     appState.isTyping = false; // logic handled in typeText
+    if (!isMuted) playMeow(); // Play meow when skipping
   } else {
     // Next scene
     const currentScene = scenes[appState.currentSceneIndex];
