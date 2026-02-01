@@ -1,0 +1,305 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Press+Start+2P&display=swap");
+
+:root {
+  --bg-color: #fffdd0; /* Cream */
+  --accent-color: #ffd1dc; /* Pastel Pink */
+  --text-color: #4a3728; /* Dark Brown */
+  --dialog-bg: #ffffff;
+  --dialog-border: #4a3728;
+  --font-header: "Press Start 2P", cursive;
+  --font-body: "Kanit", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden; /* Prevent scroll */
+}
+
+#app-container {
+  width: 100%;
+  max-width: 480px; /* Mobile width cap */
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* UI Elements */
+.progress-dots {
+  position: absolute;
+  top: 20px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(74, 55, 40, 0.2);
+  border-radius: 50%; /* Round or square depending on pref, round is friendlier */
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: var(--text-color);
+}
+
+.audio-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-family: var(--font-header);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 20;
+  opacity: 0.7;
+}
+
+/* Scene Layout */
+.scene {
+  display: none;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.scene.active {
+  display: flex;
+}
+
+/* Cat Container */
+.cat-container {
+  width: 256px;
+  height: 256px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.cat-svg {
+  width: 100%;
+  height: 100%;
+  display: none; /* Hide all cats by default */
+}
+
+.cat-svg.active {
+  display: block;
+  animation: bounceCat 2s infinite ease-in-out;
+}
+
+/* Dialogue Box */
+.dialogue-box {
+  background: var(--dialog-bg);
+  border: 4px solid var(--dialog-border);
+  border-radius: 8px; /* Slightly rounded pixel look */
+  padding: 20px;
+  width: 100%;
+  min-height: 120px;
+  position: relative;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.dialogue-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.tap-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+  animation: blink 1s infinite;
+  display: none; /* Shown when typing done */
+}
+
+.tap-hint.visible {
+  display: block;
+}
+
+/* Start Screen */
+#start-scene {
+  text-align: center;
+}
+
+h1 {
+  font-family: var(--font-header);
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+.big-btn {
+  background: var(--accent-color);
+  border: 4px solid var(--dialog-border);
+  padding: 15px 30px;
+  font-family: var(--font-header);
+  font-size: 1rem;
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: 4px 4px 0px var(--dialog-border);
+  transition: transform 0.1s;
+}
+
+.big-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--dialog-border);
+}
+
+/* Choices */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.choice-btn {
+  background: #fff;
+  border: 3px solid var(--dialog-border);
+  padding: 15px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.end-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Animations */
+@keyframes bounceCat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  55% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  60% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Heart */
+.heart-icon {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+  animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.3);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+
+.shake-text {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
