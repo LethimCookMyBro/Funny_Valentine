@@ -333,8 +333,14 @@ function makeChoice(choice) {
   document.getElementById("choices-container").style.display = "none";
 
   dialogueText.innerHTML = "เย้! 😻<br>ดีใจจังเลย... ทักมานะ!";
-  updateCatState("start");
+  updateCatState("start"); // Happy face
   tapHint.style.display = "none";
+
+  // Trigger Confetti
+  fireConfetti();
+
+  // Play Victory Sound (Ta-da!)
+  if (!isMuted) playVictorySound();
 
   const actionDiv = document.createElement("div");
   actionDiv.className = "end-actions";
@@ -344,6 +350,96 @@ function makeChoice(choice) {
         <div style="font-size:0.8rem; margin-top:10px; color:#aaa;">(แมวดีใจมาก)</div>
     `;
   document.querySelector(".dialogue-box").appendChild(actionDiv);
+}
+
+// --- Victory Sound ---
+function playVictorySound() {
+  if (!audioCtx || isMuted) return;
+  const now = audioCtx.currentTime;
+
+  // "Ta-da!" Chord: C5, E5, G5, C6
+  const notes = [523.25, 659.25, 783.99, 1046.5];
+
+  notes.forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = "square";
+    osc.frequency.setValueAtTime(freq, now + i * 0.1);
+
+    gain.gain.setValueAtTime(0.05, now + i * 0.1);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.4);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now + i * 0.1);
+    osc.stop(now + i * 0.1 + 0.5);
+  });
+}
+
+// --- Confetti Logic (Lightweight) ---
+function fireConfetti() {
+  const canvas = document.createElement("canvas");
+  canvas.style.position = "fixed";
+  canvas.style.top = "0";
+  canvas.style.left = "0";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  canvas.style.pointerEvents = "none";
+  canvas.style.zIndex = "9999";
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext("2d");
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+
+  const particles = [];
+  const colors = ["#FF5252", "#FFAB91", "#FFD740", "#69F0AE", "#40C4FF"];
+
+  // Increased particles for "not lame" effect
+  for (let i = 0; i < 300; i++) {
+    particles.push({
+      x: width / 2,
+      y: height / 2, // Burst from center
+      vx: (Math.random() - 0.5) * 25, // More explosive width
+      vy: (Math.random() - 1) * 25, // Higher jump
+      size: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rotation: Math.random() * 360,
+      rotationSpeed: (Math.random() - 0.5) * 10,
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    let activeParticles = 0;
+
+    particles.forEach((p) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.5; // Gravity
+      p.vx *= 0.95; // Air resistance/drag
+      p.rotation += p.rotationSpeed;
+
+      if (p.y < height + 20) {
+        activeParticles++;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+      }
+    });
+
+    if (activeParticles > 0) {
+      requestAnimationFrame(animate);
+    } else {
+      canvas.remove();
+    }
+  }
+  animate();
 }
 
 function copyMessage() {
